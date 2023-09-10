@@ -71,3 +71,37 @@
 (filter-in number? '(a 2 (1 3) b 7))
 (filter-in symbol? '(a (b c) 17 foo))
 (filter-in string? '(a b u "univalle" "racket" "flp" 28 90 (1 2 3)))
+
+
+;; Punto 7
+;; cartesian-product :
+;; Proposito:
+;; L1 x L2 -> L' : Procedimiento que recibe dos listas y
+;; realiza el producto cartesiano entre ellas
+;;
+;; <lista> := ()
+;;         := (<lista> <lista>)
+
+
+(define cartesian-product
+  (lambda (L1 L2)
+    (cond [(null? L1) '()]
+          [(null? L2) '()]
+          [else (append (cart-prod-helper (car L1) L2) (cartesian-product (cdr L1) L2))]
+          )
+    )
+  )
+
+(define cart-prod-helper
+  (lambda (x L)
+    (cond [(null? L) '()]
+          [else (cons (list x (car L)) (cart-prod-helper x (cdr L)))]
+          )
+    )
+  )
+
+
+;; pruebas
+(cartesian-product '(a b c) '(x y))
+(cartesian-product '(p q r) '(5 6 7))
+
