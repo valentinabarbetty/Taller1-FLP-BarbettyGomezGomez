@@ -48,5 +48,26 @@
 (down '(un (objeto (mas)) complicado))
 
 
-;; PUNTO 2
+;; PUNTO 4
 
+;; filter-in :
+;; Proposito:
+;; P x L -> L' : Procedimiento que recibe una lista y un predicado,
+;; a cada elemento de esa lista va a verificar si cumple el predicado
+;; si lo cumple, lo añade a una lista
+;;
+;; <lista> := ()
+;;         := (<predicado> <lista>)
+
+(define filter-in
+  (lambda (P L)
+    (if (null? L)
+        '()
+        (if (P (car L))
+            (cons (car L) (filter-in P (cdr L)))
+            (filter-in P (cdr L))))))
+
+;; pruebas
+(filter-in number? '(a 2 (1 3) b 7))
+(filter-in symbol? '(a (b c) 17 foo))
+(filter-in string? '(a b u "univalle" "racket" "flp" 28 90 (1 2 3)))
