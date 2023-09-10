@@ -26,6 +26,27 @@
 (invert '(("es" "racket") ("genial" "muy") (17 29) (81 o)))
 
 
+;; PUNTO 2
+
+;; down :
+;; Proposito:
+;; L -> L' : Procedimiento que recibe una lista y a cada elemento de esa lista le añade un nivel más de paréntesis
+;;
+;; <lista> := ()
+;;         := (<lista>)
+
+(define down
+  (lambda (L)
+    (if (null? L)
+        '()
+        (cons (list (car L))
+        (down (cdr L)))))) 
+
+;; Pruebas
+(down '(1 2 3))
+(down '((una) (buena) (idea)))
+(down '(un (objeto (mas)) complicado))
 
 
+;; PUNTO 2
 
