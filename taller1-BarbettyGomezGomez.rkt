@@ -194,13 +194,16 @@
           [(not(procedure? F))  "Not an operator"]
           [(not(procedure? filter))  "Not an operator"]
           [(> a b) acum]
-          [else (cond [(filter a) (filter-acum (+ a 1) b F (+ acum a) filter )]
+          [else (cond [(filter a) (filter-acum (+ a 1) b F (F a (cond [(equal? (F a acum) 0) 1] [else acum])) filter )]
                       [else (filter-acum (+ a 1) b F acum filter)])]
 
                       )
           )
     )
-
+(define filter-acum2
+  (lambda (a b F acum filter)
+        (cond [(and (equal? F *) (equal? F /)) (+ acum 1)] [else acum])
+    ))
 (check-expect (filter-acum 1 10 + 0 odd?) 25)
 (check-expect (filter-acum 1 10 + 0 even?)30)
 (check-expect (filter-acum 1 10 'a 0 even?) "Not an operator")
