@@ -4,6 +4,7 @@
 ;; Valentina Barbetty Arango - 2310050
 ;; Brayan Julio Gómez - 2310016
 ;; Jheison Gómez - 2310215
+;; https://github.com/valentinabarbetty/Taller1-FLP-BarbettyGomezGomez.git
 
 ;; PUNTO 1
 ;;
@@ -233,8 +234,9 @@
   )
 
 ;; pruebas
-(cartesian-product '(4 5) '(6 7))
-(cartesian-product '(2) '(6 7 8 9))
+(cartesian-product '(a b c) '(x y))
+(cartesian-product '(p q r) '(5 6 7))
+
 
 ;; PUNTO 8
 ;;
@@ -315,7 +317,7 @@
 ;; pruebas
 (inversions '(2 3 8 6 1))
 (inversions '(1 2 3 4))
-
+(inversions '(3 2 1))
 ;; PUNTO 10
 ;;
 ;; up : Funcion principal
@@ -489,29 +491,11 @@
   )))
 ;; pruebas
 (operate (list + * + - *) '(1 2 8 4 11 6))
-(operate (list * *) '(1 1 2))
+(operate (list *) '(4 5))
 
 
 ;; PUNTO 14
 ;;
-;; reversar-lista: funcion  auxiliar
-;; Proposito: 
-;; L1 x L2 -> L3 : La funcion reversar-lista: toma una lista "lista1" y construir una nueva lista "lista2" con los datos invertidos
-;;<reversar-lista> ::= (<lista1> <lista2>)
-;;<lista1> ::= '() | (<elemento> <lista1>)
-;;<lista2> ::= <lista1>
-;;<elemento> ::= <dato>
-;;<dato> ::= <valor> | '()
-
-
-(define (reversar-lista lista1 lista2)
-  (cond
-    [(null? lista1) lista2]
-    [else (reversar-lista (cdr lista1) (cons (car lista1) lista2))]))
-;; pruebas
-(reversar-lista '(1 2 3) '())
-(reversar-lista '(9 5 1 7 5 3) '())
-
 ;; left-right: funcion auxiliar
 ;; proposito: 
 ;; INT x BST x L1 -> L3 : La funcion "left-right:" se utiliza para encontrar la ruta desde la raíz de un árbol binario
@@ -528,7 +512,7 @@
 (define (left-right num BST result)
   (cond
     [(null? BST) "The number is not found in the tree"]
-    [(equal? (car BST) num) (reversar-lista result '())]
+    [(equal? (car BST) num) result]
     [(> num (car BST)) (left-right num (car (cddr BST)) (append-list result (list (string-append  "right"))))]
     [else (left-right num (car (cdr BST)) (append-list result (list (string-append "left"))))]))
 
@@ -629,14 +613,14 @@
 (define count-odd-and-even
   (lambda (arbol)
     (cond [(null? arbol) "Arbol vacio"]
-          [else (cons (calcularImpar arbol) (cons (calcularPar arbol) empty))]
+          [else (cons (calcularPar arbol) (cons (calcularImpar arbol) empty))]
     )
    )
 )
 
 ;; pruebas
-(count-odd-and-even '(3 (4 () (11 () ())) (26 (21 (14 () ())()) (31 () ()))))
-(count-odd-and-even '(2 (4 () (10 () ())) (26 (20 (14 () ())()) (31 () ()))))
+(count-odd-and-even '(8 (3 (1 () ()) (6 (4 () ()) (7 () ()))) (10 () (14 (13 () ()) ()))))
+(count-odd-and-even '(14 (7 () (12 () ()))(26 (20 (17 () ())())(31 () ()))))
 
 ;; PUNTO 16
 ;; Operar-binarias Funcion principal
@@ -664,10 +648,11 @@
 
 ;; pruebas
 (Operar-binarias '((2 multiplica (4 suma 1))multiplica((2 multiplica 4) resta 1)))
-(Operar-binarias '((2 multiplica 3) suma (5 resta 1)))
+(Operar-binarias '((2 multiplica (4 suma 1) ) multiplica ( (2 multiplica 4) resta 1 ) ) )
+
 
 ;;PUNTO 17
-;; mult:
+;; mult: Funcion auxiliar
 ;; Proposito:
 ;; L1 x L2 -> L' : Procedimiento que recibe dos listas y
 ;; multiplica elemento por elemento estas dos,
@@ -686,7 +671,7 @@
         (cons (* (car l1) (car l2))
               (mult (cdr l1) (cdr l2))))))
 
-;; mult:
+;; prod-scalar-matriz: funcion principal
 ;; Proposito:
 ;; L1 x L2 -> L' : Procedimiento que recibe dos listas y realiza la
 ;; multiplicación escalar entre la lista1 que es la matriz, y la lista 2
@@ -697,7 +682,6 @@
 ;; <fila> ::= '() | (<numero> <fila>)
 ;; <vector> ::= '() | (<numero> <vector>)
 ;; <numero> ::= <entero>  
-
 
 
 (define prod-scalar-matriz
@@ -714,7 +698,7 @@
 
 
 ;; PUNTO 18
-;; sum:
+;; sum: funcion auxiliar
 ;; Proposito:
 ;; L1 x L2 -> L': Procedimiento que recibe dos listas y realiza la
 ;; suma entre ellas
@@ -733,7 +717,7 @@
              (sum (cdr l1) (cdr l2))
              )))) 
 
-;; cero-izq:
+;; cero-izq: funcion auxiliar
 ;; Proposito:
 ;; L -> L': Procedimiento que recibe una lista
 ;; y añade un cero en la primera posición de esta
@@ -745,7 +729,7 @@
 (define (cero-izq lst)
   (cons 0 lst))
 
-;; cero-der:
+;; cero-der: funcion auxiliar
 ;; Proposito:
 ;; L -> L': Procedimiento que recibe una lista
 ;; y añade un cero en la ultima posición de esta
@@ -757,7 +741,7 @@
   (append lst (list 0)))
 
 
-;; pascal: 
+;; pascal: funcion principal
 ;; Proposito:
 ;; x -> L: Procedimiento que recibe un número y calcula los números pascal
 ;; hasta la fila x
