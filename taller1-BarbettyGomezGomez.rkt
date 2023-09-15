@@ -47,6 +47,24 @@
 (down '((una) (buena) (idea)))
 (down '(un (objeto (mas)) complicado))
 
+;; PUNTO 3
+;;
+;; list-set : Funcion principal
+;; Proposito:
+;; 
+;;
+;; <lista> := ()
+;;         := (<lista>)
+
+(define (list-set L n x)
+  (cond [(null? L) '() ]  
+     [(= n 0) (cons x (cdr L))]
+        [else (cons (car L) (list-set (cdr L) (- n 1) x))]))
+
+;; pruebas
+(list-set '(a b c d) 2 '(1 2))
+(list-set '(a b c d) 3 '(1 5 10))
+
 
 ;; PUNTO 4
 ;;
@@ -100,6 +118,33 @@
 (list-index number? '(a 2 (1 3) b 7))
 (list-index symbol? '(a (b c) 17 foo))
 (list-index symbol? '(1 2 (a b) 3))
+
+;; Punto 6
+;; swapper : Funcion auxiliar
+;; Proposito:
+;; 
+;
+;; <lista> := ()
+;;         := (<int> <lista>)
+
+(define (swapper E1 E2 L)
+  (define (swap-elements elem)
+    (if (equal? elem E1)
+        E2
+        (if (equal? elem E2)
+            E1
+            elem)))
+
+               (define (swap-list L)
+                 (if (null? L)'()      
+                      (cons (swap-elements (car L)) (swap-list (cdr L)))))
+                          (swap-list L))
+
+
+;;pruebas
+(swapper 'a 'd '(a b c d)) 
+(swapper 'a 'd '(a d () c d)) 
+(swapper 'x 'y '(y y x y x y x x y)) 
 
 ;; Punto 7
 ;; cart-prod-helper : Funcion auxiliar
@@ -155,7 +200,29 @@
 (cartesian-product '(4 5) '(6 7))
 (cartesian-product '(2) '(6 7 8 9))
 
+;;PUNTO 8
+;;
+;;validarLista: Funcion auxiliar 
+;;Proposito:
+;; L x INT -> INT: La función "validarLista:" tiene como propósito verificar si el primer elemento de la lista
+;;es mayor que los elementos restantes en la lista. Cuenta el número de inversiones, donde una inversión
+;;se produce cuando un elemento en una posición anterior en la lista es mayor que un elemento en una posición posterior.
+;;<List> := ()
+;;       := (<lista> <int>)
+(define (mapping F L1 L2)
+    (cond ((null? L1) '())
+      ((null? L2) '())
+         ((= (F (car L1))
+           (car L2))
+             (cons (list (car L1) (car L2))
+               (mapping F (cdr L1) (cdr L2))))
+                 (else (mapping F (cdr L1) (cdr L2)))))       
 
+
+;; pruebas
+(mapping (lambda (d) (* d 2)) (list 1 2 3) (list 2 4 6)) 
+(mapping (lambda (d) (* d 3)) (list 1 2 2) (list 2 4 6)) 
+(mapping (lambda (d) (* d 2)) (list 1 2 3) (list 3 9 12)) 
 
 ;;PUNTO 9
 ;;
@@ -200,6 +267,28 @@
 ;;pruebas
 (inversions '(2 3 8 6 1))
 (inversions '(1 2 3 4))
+
+;;PUNTO 10
+;;
+;; up : Funcion principal
+;; Proposito:
+;; x X L -> L' : Procedimiento que recibe un elemento x y lo agrega a cada elemento de la lista.
+;
+;; <lista> := ()
+;;         := (<int> <lista>)
+
+(define (up L)
+  (cond
+    ((null? L) '())
+       ((list? (car L)) 
+          (append (car L) (up (cdr L)))) 
+             (else
+                (cons (car L) (up (cdr L))))))
+
+
+;;pruebas
+(up '((1 2) (3 4)))
+(up '((x (y)) z))
 
 ;;PUNTO 11
 ;;
@@ -350,7 +439,7 @@
     [(> num (car BST)) (left-right num (car (cddr BST)) (append-list result (list (string-append  "right"))))]
     [else (left-right num (car (cdr BST)) (append-list result (list (string-append "left"))))]))
 
-; number x Arbol(BST) -> list(string): La función "path" es calcular y devolver la ruta desde el nodo raíz de un árbol binario de búsqueda (BST)
+;number x Arbol(BST) -> list(string): La función "path" es calcular y devolver la ruta desde el nodo raíz de un árbol binario de búsqueda (BST)
 ;hasta un número entero específico "n," representado como una lista de instrucciones "left" y "right."
 ;Esta ruta indicará cómo llegar desde el nodo raíz hasta el nodo que contiene el número "n" en el árbol. Si el número "n" se encuentra en el nodo raíz,
 ;la función retornará una lista vacía para indicar que no se necesita moverse desde la raíz.
@@ -368,8 +457,64 @@
 (path 17 '(14 (7 () (12 () ())) (26 (20 (17 () ())()) (31 () ()))))
 (path 14 '(14 (7 () (12 () ())) (26 (20 (17 () ())()) (31 () ()))))
 
+;;PUNTO 15
 
-;; punto 17
+(define validarParImpar
+  (lambda (num)
+    (cond [(= (remainder num 2)0) #true]
+          [else #false])
+              ))
+;; pruebas
+
+(define calcularPar
+  (lambda (arbol)
+    (cond[(null? arbol)  0 ]
+         [(validarParImpar (car arbol))  (+ 1 (calcularPar (cadr arbol)) (calcularPar (caddr arbol)))]
+         [else   (+ 0(calcularPar (cadr arbol)) (calcularPar (caddr arbol)))]
+     )
+  )
+)
+;; pruebas
+
+(define calcularImpar
+  (lambda (arbol)
+    (cond[(null? arbol)  0 ]
+         [(not (validarParImpar (car arbol)))  (+ 1 (calcularImpar (cadr arbol)) (calcularImpar (caddr arbol)))]
+         [else   (+ 0(calcularImpar (cadr arbol)) (calcularImpar (caddr arbol)))]
+    )
+  )
+)
+;; pruebas
+
+(define count-odd-and-even
+  (lambda (arbol)
+    (cond [(null? arbol) "Arbol vacio"]
+          [else (cons (calcularImpar arbol) (cons (calcularPar arbol) empty))]
+    )
+   )
+)
+
+;; pruebas
+
+;;PUNTO 16
+(define (Operar-binarias operacionB)
+   (cond
+     ((number? operacionB) operacionB) 
+       ((list? operacionB)
+        (let* ((operador (cadr operacionB))
+          (op1 (Operar-binarias (car operacionB)))
+            (op2 (Operar-binarias (caddr operacionB))))          
+               (cond              
+                   ((equal? operador 'suma) (+ op1 op2))
+                     ((equal? operador 'resta) (- op1 op2))
+                        ((equal? operador 'multiplica) (* op1 op2))                   
+                            (else ( "Operador desconocido")))))
+                                   (else ( "La operacion no es válida"))))
+
+;; pruebas
+(Operar-binarias '((2 multiplica (4 suma 1))multiplica((2 multiplica 4) resta 1)))
+(Operar-binarias '((2 multiplica 3) suma (5 resta 1)))
+;;PUNTO 17
 ;; mult:
 ;; Proposito:
 ;; L1 x L2 -> L' : Procedimiento que recibe dos listas y
