@@ -10,8 +10,11 @@
 ;; Proposito:
 ;; L -> L' : Procedimiento que recibe una lista con pares x,y e invierte esos pares de forma que queden y,x
 ;;
-;; <lista> := ()
-;;         := (<lista>)
+;; <down> ::= (down <lista>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
 
 
 (define invert
@@ -33,8 +36,11 @@
 ;; Proposito:
 ;; L -> L' : Procedimiento que recibe una lista y a cada elemento de esa lista le añade un nivel más de paréntesis
 ;;
-;; <lista> := ()
-;;         := (<lista>)
+;; <down> ::= (down <lista>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
 
 (define down
   (lambda (L)
@@ -53,8 +59,10 @@
 ;; Proposito:
 ;; 
 ;;
-;; <lista> := ()
-;;         := (<lista>)
+;;<list-set> ::= (list-set <lista> <entero> <elemento>)
+;;<lista> ::= '() | (<elemento> <lista>)
+
+
 
 (define (list-set L n x)
   (cond [(null? L) '() ]  
@@ -73,8 +81,13 @@
 ;; P x L -> L' : Procedimiento que recibe una lista y un predicado, a cada elemento de esa lista va a verificar si cumple el predicado
 ;; si lo cumple, lo añade a una lista
 ;;
-;; <lista> := ()
-;;         := (<predicado> <lista>)
+;; <filter-in> ::= (<procedimiento> <lista>)
+;; <procedimiento> ::= <predicado>
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
+
 
 (define filter-in
   (lambda (P L)
@@ -97,8 +110,11 @@
 ;; y devolver la posición de ese elemento en la lista, comenzando desde la posición 0. Si ningún elemento en la lista cumple con el
 ;; predicado P, la función debe retornar #f.
 ;;
-;;<List> := ()
-;;       := (<Scheme-value> <lista>)
+;;<list-index> ::= ( <predicado> <lista>)
+;;<lista> ::= '() | (<elemento> <lista>)
+;;<elemento> ::= <dato>
+;;<dato> ::= <simbolo> | <numero> | '()
+
 
 (define list-index
   (lambda (P L)
@@ -124,8 +140,13 @@
 ;; Proposito:
 ;; 
 ;
-;; <lista> := ()
-;;         := (<int> <lista>)
+;; <swapper> ::= (<elemento1> <elemento2> <lista>)
+;; <elemento1> ::= <dato>
+;; <elemento2> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <dato> | <swapper>
+
 
 (define (swapper E1 E2 L)
   (define (swap-elements elem)
@@ -151,8 +172,11 @@
 ;; Proposito:
 ;; x X L -> L' : Procedimiento que recibe un elemento x y lo agrega a cada elemento de la lista.
 ;
-;; <lista> := ()
-;;         := (<int> <lista>)
+;; <cart-prod-helper> ::= (<elemento> <lista>)
+;; <elemento> ::= <dato>
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <dato> ::= <simbolo> | <numero> | '()
+
 
 (define cart-prod-helper
   (lambda (x L)
@@ -165,8 +189,12 @@
 ;; Proposito:
 ;; L1 X L2 -> L' : Procedimiento que recibe dos listas y las une en una lista.
 ;
-;; <lista> := ()
-;;         := (<lista> <lista>)
+;; <append-list> ::= (<lista1> <lista2>)
+;; <lista1> ::= '() | (<elemento> <lista1>)
+;; <lista2> ::= '() | (<elemento> <lista1>)
+;; <elemento> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
 
 
 (define (append-list lista1 lista2)
@@ -184,8 +212,12 @@
 ;; Proposito:
 ;; L1 x L2 -> L' : Procedimiento que recibe dos listas y realiza el producto cartesiano entre ellas
 ;;
-;; <lista> := ()
-;;         := (<lista> <lista>)
+;; <cartesian-product> ::= (<lista1> <lista2>)
+;; <lista1> ::= '() | (<elemento> <lista1>)
+;; <lista2> ::= '() | (<elemento> <lista2>)
+;; <elemento-> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
 
 (define cartesian-product
   (lambda (L1 L2)
@@ -207,8 +239,14 @@
 ;; L x INT -> INT: La función "validarLista:" tiene como propósito verificar si el primer elemento de la lista
 ;;es mayor que los elementos restantes en la lista. Cuenta el número de inversiones, donde una inversión
 ;;se produce cuando un elemento en una posición anterior en la lista es mayor que un elemento en una posición posterior.
-;;<List> := ()
-;;       := (<lista> <int>)
+;; <mapping> ::= (<funcion> <lista1> <lista2>)
+;; <funcion> ::= <predicado>
+;; <lista1> ::= '() | (<elemento> <lista1>)
+;; <lista2> ::= '() | (<elemento> <lista2>)
+;; <elemento> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
+
 (define (mapping F L1 L2)
     (cond ((null? L1) '())
       ((null? L2) '())
@@ -231,8 +269,11 @@
 ;; L x INT -> INT: La función "validarLista:" tiene como propósito verificar si el primer elemento de la lista
 ;;es mayor que los elementos restantes en la lista. Cuenta el número de inversiones, donde una inversión
 ;;se produce cuando un elemento en una posición anterior en la lista es mayor que un elemento en una posición posterior.
-;;<List> := ()
-;;       := (<lista> <int>)
+;; <validarLista> ::= (<lista> <numero>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <numero>
+;; <numero> ::= <valor-numerico>
+
 
 (define validarLista
   (lambda (L numero)
@@ -252,8 +293,11 @@
 ;;el valor en la posición j. Esta función utiliza un enfoque recursivo para contar todas las inversiones presentes en la lista hasta que se haya procesado por completo.
 ;;Su resultado proporciona una medida de cuántas veces ocurren inversiones en la lista,
 ;;
-;;<List> := ()
-;;       := (<lista>)
+;; <inversions> ::= (<lista>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <numero>
+;;<numero> ::= <valor-numerico>
+
 
 (define inversions
   (lambda (L)
@@ -274,14 +318,18 @@
 ;; Proposito:
 ;; x X L -> L' : Procedimiento que recibe un elemento x y lo agrega a cada elemento de la lista.
 ;
-;; <lista> := ()
-;;         := (<int> <lista>)
+;; <up> ::= (<lista>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <dato> | <sublista>
+;; <dato> ::= <simbolo> | <numero> | '()
+;; <sublista> ::= <lista>
+
 
 (define (up L)
   (cond
     ((null? L) '())
        ((list? (car L)) 
-          (append (car L) (up (cdr L)))) 
+          (append-list (car L) (up (cdr L)))) 
              (else
                 (cons (car L) (up (cdr L))))))
 
@@ -295,8 +343,12 @@
 ;length-list: funcion auxiliar
 ;Proposito:
 ;L -> int :  La funcion "length-list" tiene como propósito calcular la longitud (cantidad de elementos) de una lista.
-;;<List> := ()
-;;       := (<lista>)
+;; <length-list> ::= (<lista>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <dato>
+;; <dato> ::= <simbolo> | <numero> | '()
+
+
 (define length-list
   (lambda (L)
     (cond [(null? L) 0]
@@ -312,8 +364,14 @@
 ;perform-operation: funcion auxiliar
 ;Proposito: 
 ;F x L1 x L2 -> L3: Los valores de entrada son una operación binaria (denominada F) y dos listas, y la función devuelve como resultado otra lista.
-;;<List> := ()
-;;       := (<Scheme-value> <lista> <lista>)
+;; <perform-operation> ::= (<funcion> <lista1> <lista2>)
+;; <funcion> ::= + | - | * | /  
+;; <lista1> ::= '() | (<elemento> <lista1>)
+;; <lista2> ::= '() | (<elemento2> <lista2>)
+;; <elemento> ::= <dato>
+
+
+
 (define perform-operation
   (lambda (F L1 L2)
        (cond [(null? L1) empty]
@@ -330,8 +388,14 @@
 ;;Proposito:
 ;; F L1 L2 -> L3: La función "perform-operation" tiene como propósito realizar una operación binaria (representada por la función F)
 ;en dos listas (L1 y L2) elemento por elemento y devolver una nueva lista que contiene los resultados de aplicar F a los elementos correspondientes de las dos listas.
-;;<List> := ()
-;;       := (<Scheme-value> <lista> <lista>)
+;; <zip> ::= (<funcion> <lista1> <lista2>)
+;; <funcion> ::= + | - | * | / 
+;; <lista1> ::= '() | (<elemento> <lista1>)
+;; <lista2> ::= '() | (<elemento> <lista2>)
+;; <elemento> ::= <dato>
+
+
+
 (define zip
   (lambda (F L1 L2)
   (cond [(not (procedure? F)) "Not an operator"]
@@ -352,8 +416,16 @@
 ;;a b F acum filter -> acum: El propósito de la función "filter-acum" es aplicar una función binaria (F) a todos los elementos que se encuentran dentro de un intervalo dado [a, b],
 ;; y además, estos elementos deben cumplir con un cierto criterio especificado por una función unaria (filter).
 ;; El resultado de cada aplicación de F se acumula en un valor inicial llamado "acum," y al final de este proceso, la función retorna el valor final de "acum."
-;;<valor-de-scheme> := ()
-;;       := (<int> <int> <valor-de-scheme> <int><valor-de-scheme>)
+;; <filter-acum> ::= (<numero> <numero> <funcion> <acumulador> <funcion-de-filtrado>)
+;; <numero> ::= <valor-numerico>
+;; <valor-numerico> ::= <entero> | <decimal>
+;; <acumulador> ::= <numero>
+;; <funcion-de-filtrado> ::= <predicado>  ; Una función que toma un argumento y devuelve un valor booleano
+;; <predicado> ::= (lambda (<parametro>) <expresion>)
+
+
+
+
 (define filter-acum
   (lambda (a b F acum filter)
     (cond [(not (and (number? a) (number? b))) "the parameter must be a number"]
@@ -378,8 +450,11 @@
 ;lrators lrands acum -> INT :tiene el propósito de realizar la operación binaria entre los elementos de las listas lrators y lrands, acumulando los resultados parciales en la variable acum.
 ;A medida que procesa los elementos de ambas listas de manera recursiva, su objetivo es calcular un resultado final que represente la aplicación sucesiva de
 ;operadores binarios a operandos correspondientes en las listas dadas.
-;;<List> := ()
-;;       := (<lista><lista><int>)
+;; <resultado> ::= (<lista-de-operadores> <lista-de-operandos> <valor-acumulativo>)
+;; <lista-de-operadores> ::= '() | (<operador> <lista-de-operadores>)
+;; <operador> ::= + | - | * | /  
+;; <lista-de-operandos> ::= '() | (<valor> <lista-de-operandos>)
+
 
 (define resultado
   (lambda (lrators lrands acum)
@@ -397,8 +472,13 @@
 ;lrators lrands ->la función "(operate lrators lrands)" es tomar dos listas como entrada: "lrators," que contiene funciones binarias, y "lrands,"
 ;;que contiene números. Luego, la función realiza una serie de operaciones sucesivas, aplicando las funciones en "lrators" a los valores en "lrands"
 ;;de manera secuencial. El resultado final de estas operaciones se devuelve como el resultado de la función.
-;;<List> := ()
-;;       := (<lista><lista>)
+;; <operate> ::= (<lista-de-operadores> <lista-de-operandos>)
+;; <lista-de-operadores> ::= '() | (<operador> <lista-de-operadores>)
+;; <operador> ::= + | - | * | / 
+;; <lista-de-operandos> ::= '() | (<valor> <lista-de-operandos>)
+
+
+
 (define operate
   (lambda (lrators lrands)
   (cond
@@ -416,8 +496,15 @@
 ;reversar-lista: funcion  auxiliar
 ;Proposito: 
 ;lista1 x lista2 -> lista3 : Tiene como proposito tomar una lista "lista1" y construir una nueva lista "lista2" con los datos invertidos
-;;<List> := ()
-;;       := (<lista><lista>)
+;;<reversar-lista> ::= (<lista1> <lista2>)
+;;<lista1> ::= '() | (<elemento> <lista1>)
+;;<lista2> ::= <lista1>
+;;<elemento> ::= <dato>
+;;<dato> ::= <valor> | '()
+
+
+
+
 (define (reversar-lista lista1 lista2)
   (cond
     [(null? lista1) lista2]
@@ -429,9 +516,14 @@
 ;de búsqueda hasta un número específico num dentro del árbol. Su propósito es determinar si el número está en el árbol y,
 ;si es así, proporcionar la ruta (indicada por cadenas "left" y "right") desde la raíz hasta ese número.
 
-;<arbol-binario> ::=()
-;;               ::= <int>
-;;               ::(<int> <arbol-binario><arbol-binario>)
+;;<left-right> ::= (<numero> <BST> <result>)
+;;<numero> ::= <entero> 
+;;<BST> ::= '() | (<valor> <BST> <BST>)
+;; <valor> ::= <numero> 
+;; <result> ::= <lista-de-movimientos>
+;; <lista-de-movimientos> ::= '() | (<movimiento> <lista-de-movimientos>)
+;; <movimiento> ::= "left" | "right" 
+
 (define (left-right num BST result)
   (cond
     [(null? BST) "The number is not found in the tree"]
@@ -443,9 +535,11 @@
 ;hasta un número entero específico "n," representado como una lista de instrucciones "left" y "right."
 ;Esta ruta indicará cómo llegar desde el nodo raíz hasta el nodo que contiene el número "n" en el árbol. Si el número "n" se encuentra en el nodo raíz,
 ;la función retornará una lista vacía para indicar que no se necesita moverse desde la raíz.
-;<arbol-binario> ::=()
-;;               ::= <int>
-;;               ::(<int> <arbol-binario><arbol-binario>)
+
+;; <path> ::= (<numero> <BST>)
+;; <numero> ::= <entero>
+;; <BST> ::= '() | (<valor> <BST> <BST>)
+;; <valor> ::= <numero> 
 (define (path num BST)
   (cond
     [(null? BST) empty]
@@ -459,12 +553,24 @@
 
 ;;PUNTO 15
 
+;; <validarParImpar> ::= (validarParImpar <numero>)
+;; <numero> ::= <entero>  ; Representa un número entero
+
+
+
 (define validarParImpar
   (lambda (num)
     (cond [(= (remainder num 2)0) #true]
           [else #false])
               ))
 ;; pruebas
+;;<calcularPar> ::= (<arbol>)
+;;<arbol> ::= '() | (<nodo> <arbol> <arbol>)
+;;<nodo> ::= <numero>
+;;<numero> ::= <entero><
+
+
+
 
 (define calcularPar
   (lambda (arbol)
@@ -476,6 +582,13 @@
 )
 ;; pruebas
 
+
+;;<calcularImpar> ::= (<arbol>)
+;;<arbol> ::= '() | (<nodo> <arbol> <arbol>)
+;; <nodo> ::= <numero>
+;; <numero> ::= <entero> 
+
+
 (define calcularImpar
   (lambda (arbol)
     (cond[(null? arbol)  0 ]
@@ -485,6 +598,12 @@
   )
 )
 ;; pruebas
+
+;;<count-odd-and-even> ::= (<arbol>)
+;;<arbol> ::= '() | (<nodo> <arbol> <arbol>)
+;;<nodo> ::= <numero>
+;;<numero> ::= <entero> 
+
 
 (define count-odd-and-even
   (lambda (arbol)
@@ -497,6 +616,12 @@
 ;; pruebas
 
 ;;PUNTO 16
+;;<Operar-binarias> ::= (<expresion>)
+;;<expresion> ::= <numero> | (<operador> <expresion> <expresion>)
+;;<numero> ::= <entero>
+
+
+
 (define (Operar-binarias operacionB)
    (cond
      ((number? operacionB) operacionB) 
@@ -514,6 +639,8 @@
 ;; pruebas
 (Operar-binarias '((2 multiplica (4 suma 1))multiplica((2 multiplica 4) resta 1)))
 (Operar-binarias '((2 multiplica 3) suma (5 resta 1)))
+
+
 ;;PUNTO 17
 ;; mult:
 ;; Proposito:
@@ -521,8 +648,11 @@
 ;; multiplica elemento por elemento estas dos,
 ;; devolviendo una nueva lista con los productos correspondientes.
 ;;
-;; <lista> := ()
-;;         := (<lista> <lista>)
+;; <mult> ::= (<lista1> <lista2>)
+;; <lista1> ::= '() | (<numero> <lista1>)
+;; <lista2> ::= '() | (<numero> <lista2>)
+;; <numero> ::= <entero> 
+
 
 (define mult
   (lambda (l1 l2)
@@ -537,8 +667,12 @@
 ;; multiplicación escalar entre la lista1 que es la matriz, y la lista 2
 ;; que es el vector
 ;;
-;; <lista> := ()
-;;         := (<lista> <lista>)
+;; <prod-scalar-matriz> ::= (<matriz> <vector>)
+;; <matriz> ::= '() | (<fila> <matriz>)
+;; <fila> ::= '() | (<numero> <fila>)
+;; <vector> ::= '() | (<numero> <vector>)
+;; <numero> ::= <entero>  
+
 
 
 (define prod-scalar-matriz
@@ -560,8 +694,11 @@
 ;; L1 x L2 -> L': Procedimiento que recibe dos listas y realiza la
 ;; suma entre ellas
 ;;
-;; <lista> := ()
-;;         := (<lista> <lista>)
+;; <sum> ::= (<lista1> <lista2>)
+;; <lista1> ::= '() | (<numero> <lista1>)
+;; <lista2> ::= '() | (<numero> <lista2>)
+
+
 
 (define sum
   (lambda (l1 l2)
@@ -576,6 +713,9 @@
 ;; L -> L': Procedimiento que recibe una lista
 ;; y añade un cero en la primera posición de esta
 ;;
+;;<cero-izq> ::= (<lista>)
+;;<lista> ::= '() | (<elemento> <lista>)
+;;<elemento> ::= <numero> 
 
 
 
@@ -586,7 +726,9 @@
 ;; Proposito:
 ;; L -> L': Procedimiento que recibe una lista
 ;; y añade un cero en la ultima posición de esta
-;;
+;; <cero-der> ::= (<lista>)
+;; <lista> ::= '() | (<elemento> <lista>)
+;; <elemento> ::= <numero> 
 
 
 
@@ -599,8 +741,8 @@
 ;; x -> L: Procedimiento que recibe un número y calcula los números pascal
 ;; hasta la fila x
 ;;
-;; <lista> := ()
-;;         := (<int>)
+;; <pascal> ::= (<x>)
+;; <x> ::= <entero> 
 
 
 (define pascal
